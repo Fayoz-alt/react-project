@@ -243,7 +243,6 @@ function Details() {
         Back
       </Button>
 
-      {/* Images */}
       <Box
         sx={{
           position: "relative",
@@ -287,7 +286,6 @@ function Details() {
           justifyContent: "space-between",
         }}
       >
-        {/* Listing information */}
         <Box sx={{ flex: 1 }}>
           <Typography variant="h4" sx={{ fontWeight: 700 }}>
             {listing.title}
@@ -314,7 +312,7 @@ function Details() {
           </Typography>
 
           <Typography sx={{ mt: 2 }}>
-             {listing.rating} · {listing.reviewsCount} reviews
+            {listing.rating} · {listing.reviewsCount} reviews
           </Typography>
 
           <Typography sx={{ mt: 3 }}>
@@ -322,7 +320,6 @@ function Details() {
             {listing.beds} beds · {listing.bathrooms} bathrooms
           </Typography>
 
-          {/* Description */}
           <Box sx={{ mt: 4 }}>
             <Typography
               variant="h6"
@@ -355,7 +352,11 @@ function Details() {
               Amenities
             </Typography>
 
-            <Stack direction="row" spacing={1} flexWrap="wrap">
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ display: `flex`, flexWrap: `wrap` }}
+            >
               {listing.amenities.map((amenity, index) => (
                 <Box
                   key={index}
