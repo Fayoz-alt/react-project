@@ -4,6 +4,9 @@ import { useState } from "react";
 import ListingCard from "./ListingCard";
 import ListingsToolbar from "./ListingsToolbar";
 import Pagination from "./Pagination";
+import { Box, Grid, Skeleton, Stack } from "@mui/material";
+import { useAuth } from "./Auth";
+import { useNavigate } from "react-router";
 
 const listingsQuery = gql`
   query Listings($limit: Int, $page: Int, $search: String) {
@@ -13,6 +16,7 @@ const listingsQuery = gql`
         title
         pricePerNight
         images
+        isFavorite
       }
       pagination {
         total
@@ -30,41 +34,81 @@ const ADD_FAVORITE = gql`
     }
   }
 `;
+const REMOVE_FAVORITE = gql`
+  mutation RemoveFavorite($listingId: ID!) {
+  removeFavorite(listingId: $listingId) {
+    id
+  }
+}
 
-function Listings() {
+`
+
+
+function Listings({ search }) {
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState(``);
+  const { accessToken } = useAuth()
+  const navigate = useNavigate()
 
   const { data, loading, error } = useQuery(listingsQuery, {
-    variables: { limit: 5, page: page, search: search },
+    variables: { limit: 8, page: page - 1, search: search },
   });
-  const [addFavorite] = useMutation(ADD_FAVORITE);
+
+  const [addFavorite, { error: addFavErr }] = useMutation(ADD_FAVORITE);
+  const [removeFavorite, { error: removeFavErr }] = useMutation(REMOVE_FAVORITE)
 
   const totalPages = data?.listings?.pagination?.totalPages;
+  console.log(page);
 
   return (
     <section className="listings-section">
-      <ListingsToolbar search={search} onSearchChange={setSearch} />
+      <ListingsToolbar />
       <div className="listing-grid">
-        {loading && <h2>Loading...</h2>}
+        {loading && (
+          <div className="listing-grid">
+            {new Array(8).fill(0).map((_, i) => (
+              <div className="card" key={i}>
+                <Skeleton variant="rectangular" height={180} style={{ width: '100%', borderRadius: `16px` }} />
+                <Box sx={{ pt: 1.5, width: '100%' }}>
+                  <Skeleton variant="text" width="60%" height={24} />
+                  <Skeleton variant="text" width="40%" height={20} />
+                </Box>
+              </div>
+            ))}
+          </div>
+        )}
+
         {error && <p className="listing-message">{error.message}</p>}
 
         {data?.listings?.pagination.total == 0 && (
           <h2 className="listing-message">No Results</h2>
-        )}
+        )} 
         {data?.listings?.items?.map((listing) => (
           <ListingCard
             key={listing.id}
             listing={listing}
-            onFavorite={(listingId) =>
-              addFavorite({ variables: { listingId } })
+            onFavorite={(listingId) => {
+              if (!accessToken) {
+                navigate(`/login`)
+              }
+              else {
+                if (listing?.isFavorite) {
+                  removeFavorite({ variables: { listingId } })
+                }
+                else {
+                  addFavorite({ variables: { listingId } })
+                }
+              }
+            }
             }
           />
         ))}
       </div>
       {!loading && (
         <Pagination
+          page={page}
+          count={totalPages}
           currentPage={page}
+          showFirstButton
           totalPages={totalPages}
           onPageChange={setPage}
         />

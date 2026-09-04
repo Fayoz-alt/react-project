@@ -5,6 +5,8 @@ import { ApolloProvider } from "@apollo/client/react";
 import { ToastContainer } from "react-toastify";
 import { client } from "./components/graphql-client";
 import "./App.css";
+import Login from "./components/Login";
+import Details from "./components/Details";
 
 function App() {
   const isRegisterOpen = true;
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register open={isRegisterOpen} />} />
+        <Route path="/login" element={<Login open={isRegisterOpen} />} />
+        <Route path="/listing:id" element={<Details />} />
       </Routes>
       <ToastContainer />
     </ApolloProvider>

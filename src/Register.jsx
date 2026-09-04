@@ -67,7 +67,7 @@ function Register({ open, setOpen }) {
       maxWidth="xs"
       PaperProps={{ className: "register-dialog" }}
     >
-      <Stack spacing={2} className="register-content">
+      <Stack spacing={2} className="register-content" sx={{padding: 3}}>
         <DialogTitle>
           <Typography>Welcome to AirBn</Typography>
         </DialogTitle>

@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-function ListingsToolbar({ search, onSearchChange }) {
+function ListingsToolbar() {
   return (
     <Box
       sx={{
@@ -46,22 +46,6 @@ function ListingsToolbar({ search, onSearchChange }) {
           Browse homes made for every kind of trip.
         </Typography>
       </Box>
-
-      <TextField
-        label="Where"
-        placeholder="Search destinations"
-        value={search}
-        onChange={(event) => onSearchChange(event.target.value)}
-        size="small"
-        sx={{
-          minWidth: { xs: "100%", sm: 260 },
-          "& .MuiOutlinedInput-root": {
-            borderRadius: 2,
-            backgroundColor: "#fff",
-            boxShadow: "0 3px 10px rgba(0,0,0,0.07)",
-          },
-        }}
-      />
     </Box>
   );
 }
