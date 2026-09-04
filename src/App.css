@@ -1,0 +1,257 @@
+.site-shell {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.site-header {
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  padding: 0 5vw;
+}
+
+.brand {
+  align-items: center;
+  color: #ff385c;
+  display: flex;
+  font-size: 22px;
+  font-weight: 800;
+  gap: 7px;
+  letter-spacing: -0.5px;
+}
+
+.brand-mark {
+  align-items: center;
+  background: #ff385c;
+  border-radius: 50% 50% 50% 4px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 17px;
+  height: 28px;
+  justify-content: center;
+  transform: rotate(-45deg);
+  width: 28px;
+}
+
+.brand-mark::first-letter {
+  transform: rotate(45deg);
+}
+
+.main-nav {
+  display: flex;
+  gap: 30px;
+  margin-left: 80px;
+}
+
+.main-nav a,
+.profile-link {
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.main-nav a:hover,
+.profile-link:hover {
+  color: #ff385c;
+}
+
+.profile-link {
+  border: 1px solid #dddddd;
+  border-radius: 22px;
+  padding: 10px 17px;
+}
+
+.listings-section {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 54px 5vw 70px;
+}
+
+.listings-intro {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  color: #ff385c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.listings-intro h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin: 0;
+  max-width: 540px;
+}
+
+.intro-copy {
+  color: #717171;
+  margin: 13px 0 0;
+}
+
+.search-box {
+  border: 1px solid #dddddd;
+  border-radius: 13px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 7%);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 245px;
+  padding: 11px 15px;
+}
+
+.search-box span {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.search-box input {
+  border: 0;
+  color: #555;
+  font-size: 13px;
+  outline: 0;
+  padding: 0;
+}
+
+.listing-grid {
+  display: grid;
+  gap: 30px 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.listing-card {
+  min-width: 0;
+}
+
+.listing-image-wrap {
+  aspect-ratio: 1 / 0.94;
+  background: #f1f1f1;
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
+}
+
+.listing-image {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.favorite-button {
+  background: rgb(255 255 255 / 90%) !important;
+  color: #333 !important;
+  position: absolute !important;
+  right: 10px;
+  top: 10px;
+}
+
+.listing-info h2 {
+  font-size: 15px;
+  margin: 12px 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listing-info p {
+  color: #717171;
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.listing-info strong {
+  font-size: 13px;
+}
+
+.listing-message {
+  color: #717171;
+  grid-column: 1 / -1;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 42px;
+}
+
+.pagination button {
+  background: #fff;
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 36px;
+  width: 36px;
+}
+
+.pagination button.active,
+.pagination button:hover {
+  background: #222;
+  border-color: #222;
+  color: #fff;
+}
+
+.home-action {
+  display: none;
+}
+
+.register-dialog {
+  border-radius: 16px !important;
+}
+
+.register-content {
+  padding: 4px;
+}
+
+@media (max-width: 900px) {
+  .listing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    height: 68px;
+    padding: 0 20px;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .listings-section {
+    padding: 34px 20px 50px;
+  }
+
+  .listings-intro {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .search-box {
+    min-width: 0;
+  }
+
+  .listing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .listing-grid {
+    grid-template-columns: 1fr;
+  }
+}
