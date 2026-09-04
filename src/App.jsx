@@ -7,6 +7,8 @@ import { client } from "./components/graphql-client";
 import "./App.css";
 import Login from "./components/Login";
 import Details from "./components/Details";
+import Favorites from "./components/Favorites";
+import Bookings from "./components/Bookings";
 
 function App() {
   const isRegisterOpen = true;
@@ -17,7 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register open={isRegisterOpen} />} />
         <Route path="/login" element={<Login open={isRegisterOpen} />} />
-        <Route path="/listing:id" element={<Details />} />
+        <Route path="/listings/:id" element={<Details />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <ToastContainer />
     </ApolloProvider>

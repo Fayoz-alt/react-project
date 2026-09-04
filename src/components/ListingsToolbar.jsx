@@ -1,50 +1,123 @@
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import { Link } from "react-router";
+import { useAuth } from "./Auth";
 
 function ListingsToolbar() {
+  const { accessToken } = useAuth();
   return (
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-end",
+        justifyContent: "center",
+        alignItems: "center",
         gap: 3,
-        mb: 4,
+        mb: 5,
         flexWrap: "wrap",
       }}
     >
-      <Box>
-        <Typography
-          variant="overline"
-          sx={{
-            color: "#ff385c",
-            display: "block",
-            fontWeight: 800,
-            letterSpacing: 1.4,
-            mb: 1,
+      <Box
+        component={Link}
+        to={!accessToken ? "/login" : "/favorites"}
+        sx={{
+          width: {
+            xs: "100%",
+            sm: "320px",
+          },
+          height: "150px",
+          borderRadius: "20px",
+          border: "1px solid #eeeeee",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          textDecoration: "none",
+          color: "#222",
+          boxShadow: "0 5px 20px rgba(0,0,0,0.06)",
+          transition: "0.25s",
+        }}
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1280px-Heart_coraz%C3%B3n.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+          style={{
+            width: "55px",
+            height: "55px",
           }}
-        >
-          Find your next stay
-        </Typography>
-        <Typography
-          variant="h3"
-          sx={{
-            fontSize: { xs: "2rem", md: "3rem" },
-            letterSpacing: "-0.06em",
-            lineHeight: 1.1,
-            fontWeight: 800,
-            maxWidth: 540,
+        />
+
+        <Stack>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 800,
+            }}
+          >
+            Favorites
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#717171",
+              mt: 0.5,
+            }}
+          >
+            Your saved places
+          </Typography>
+        </Stack>
+      </Box>
+
+      <Box
+        component={Link}
+        to={!accessToken ? "/login" : "/bookings"}
+        sx={{
+          width: {
+            xs: "100%",
+            sm: "320px",
+          },
+          height: "150px",
+          borderRadius: "20px",
+          border: "1px solid #eeeeee",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          textDecoration: "none",
+          color: "#222",
+          boxShadow: "0 5px 20px rgba(0,0,0,0.06)",
+          transition: "0.25s",
+        }}
+      >
+        <img
+          src="https://thumbs.dreamstime.com/b/colorful-books-icon-logo-colorful-books-icon-logo-white-background-141938439.jpg"
+          style={{
+            width: "65px",
+            height: "65px",
+            borderRadius: "50%",
           }}
-        >
-          Stay somewhere memorable
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{ color: "#717171", mt: 1.5, fontSize: "1rem" }}
-        >
-          Browse homes made for every kind of trip.
-        </Typography>
+        />
+
+        <Stack>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 800,
+            }}
+          >
+            My Bookings
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#717171",
+              mt: 0.5,
+            }}
+          >
+            Manage your trips
+          </Typography>
+        </Stack>
       </Box>
     </Box>
   );

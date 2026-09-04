@@ -1,24 +1,58 @@
-import { Avatar, IconButton, Menu, MenuItem, Stack, Tooltip, Divider, ListItemIcon, TextField, InputAdornment } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Tooltip,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  TextField,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import Logout from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import BadgeIcon from "@mui/icons-material/Badge";
 import { Link } from "react-router";
 import { useAuth } from "./Auth";
 import { deepOrange } from "@mui/material/colors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import LogOutConfirm from "./LogOutConfirm";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
+
+const ME_QUERY = gql`
+  query Me {
+    me {
+      email
+      id
+      name
+    }
+  }
+`;
 
 function SiteHeader({ search, onSearchChange }) {
   const { accessToken, user } = useAuth();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [openLogOut, setOpenLogOut] = useState(false)
+  const [openLogOut, setOpenLogOut] = useState(false);
+
+  const { data } = useQuery(ME_QUERY, {
+    skip: !accessToken,
+  });
+
+  const profileUser = data?.me || user;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,8 +63,8 @@ function SiteHeader({ search, onSearchChange }) {
   };
 
   const handleLogOut = () => {
-    setOpenLogOut(true)
-  }
+    setOpenLogOut(true);
+  };
 
   return (
     <AppBar
@@ -43,6 +77,7 @@ function SiteHeader({ search, onSearchChange }) {
       }}
     >
       <LogOutConfirm open={openLogOut} setOpenLogOut={setOpenLogOut} />
+
       <Toolbar
         sx={{
           height: 80,
@@ -63,13 +98,20 @@ function SiteHeader({ search, onSearchChange }) {
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemnJfS6fLmDnT9rMedVNHiPRp-Ur9kov8GsZnzLSpQQ&s=10"
             alt="Logo"
-            style={{ maxWidth: "120px", width: "100%" }}
+            style={{
+              maxWidth: "120px",
+              width: "100%",
+            }}
           />
         </Box>
 
         <Box
           component="nav"
-          sx={{ display: { xs: "none", md: "flex" }, gap: 3, ml: 6 }}
+          sx={{
+            display: { xs: "none", md: "flex" },
+            gap: 3,
+            ml: 6,
+          }}
           aria-label="Main navigation"
         >
           <TextField
@@ -87,7 +129,6 @@ function SiteHeader({ search, onSearchChange }) {
                 ),
               },
             }}
-
             sx={{
               minWidth: { xs: "100%", sm: 600 },
               "& .MuiOutlinedInput-root": {
@@ -100,7 +141,13 @@ function SiteHeader({ search, onSearchChange }) {
           />
         </Box>
 
-        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           {!accessToken && (
             <Button
               component={Link}
@@ -124,9 +171,15 @@ function SiteHeader({ search, onSearchChange }) {
             </Button>
           )}
 
-          {user && (
+          {profileUser && (
             <React.Fragment>
-              <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
                 <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClick}
@@ -136,12 +189,20 @@ function SiteHeader({ search, onSearchChange }) {
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 32, height: 32, bgcolor: deepOrange[500], cursor: "pointer" }}>
-                      {user?.name?.slice(0, 1).toUpperCase()}
+                    <Avatar
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        bgcolor: deepOrange[500],
+                        cursor: "pointer",
+                      }}
+                    >
+                      {profileUser?.name?.slice(0, 1).toUpperCase()}
                     </Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
+
               <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -152,15 +213,18 @@ function SiteHeader({ search, onSearchChange }) {
                   paper: {
                     elevation: 0,
                     sx: {
+                      minWidth: 280,
                       overflow: "visible",
                       filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                       mt: 1.5,
+
                       "& .MuiAvatar-root": {
                         width: 32,
                         height: 32,
                         ml: -0.5,
                         mr: 1,
                       },
+
                       "&::before": {
                         content: '""',
                         display: "block",
@@ -176,21 +240,66 @@ function SiteHeader({ search, onSearchChange }) {
                     },
                   },
                 }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                transformOrigin={{
+                  horizontal: "right",
+                  vertical: "top",
+                }}
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "bottom",
+                }}
               >
-                <MenuItem onClick={handleClose}>
-                  <Avatar sx={{ width: 32, height: 32, bgcolor: deepOrange[500] }}>
-                    {user?.name?.slice(0, 1).toUpperCase()}
-                  </Avatar> Profile
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={handleClose}>
+                <MenuItem
+                  sx={{
+                    cursor: "default",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                >
                   <ListItemIcon>
-                    <Settings fontSize="small" />
+                    <PersonIcon fontSize="small" />
                   </ListItemIcon>
-                  Settings
+
+                  <ListItemText
+                    primary="Full Name"
+                    secondary={profileUser?.name}
+                  />
                 </MenuItem>
+
+                <MenuItem
+                  sx={{
+                    cursor: "default",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                >
+                  <ListItemIcon>
+                    <EmailIcon fontSize="small" />
+                  </ListItemIcon>
+
+                  <ListItemText
+                    primary="Email"
+                    secondary={profileUser?.email}
+                  />
+                </MenuItem>
+
+                <MenuItem
+                  sx={{
+                    cursor: "default",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                >
+                  <ListItemIcon>
+                    <BadgeIcon fontSize="small" />
+                  </ListItemIcon>
+
+                  <ListItemText primary="User ID" secondary={profileUser?.id} />
+                </MenuItem>
+
                 <MenuItem onClick={handleLogOut}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
