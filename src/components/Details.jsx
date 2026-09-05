@@ -394,14 +394,12 @@ function Details() {
 
           <Stack spacing={2} sx={{ mt: 3 }}>
             <TextField
-              label="Check in"
               type="date"
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
             />
 
             <TextField
-              label="Check out"
               type="date"
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}

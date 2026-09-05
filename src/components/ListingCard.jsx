@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 
 function ListingCard({ listing, onFavorite }) {
   const navigate = useNavigate();
-  console.log(listing.isFavorite);
 
   return (
     <article
@@ -35,7 +34,7 @@ function ListingCard({ listing, onFavorite }) {
         </IconButton>
       </div>
       <div className="listing-info">
-        <h2>{listing.title}</h2>
+        <h2 style={{ fontSize: 15 }}>{listing.title}</h2>
         <p>Comfortable home for your next trip</p>
         <strong>${listing.pricePerNight} night</strong>
       </div>

@@ -115,20 +115,12 @@ function SiteHeader({ search, onSearchChange }) {
           aria-label="Main navigation"
         >
           <TextField
-            placeholder="Search destinations"
+            className="serach-input"
+            placeholder="Search..."
             value={search}
-            onChange={(event) => onSearchChange(event.target.value)}
+            onChange={(e) => onSearchChange(e.target.value)}
             size="medium"
             fullWidth
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              },
-            }}
             sx={{
               minWidth: { xs: "100%", sm: 600 },
               "& .MuiOutlinedInput-root": {
@@ -148,13 +140,12 @@ function SiteHeader({ search, onSearchChange }) {
             alignItems: "center",
           }}
         >
-          {!accessToken && (
+          {!accessToken ? (
             <Button
               component={Link}
               to="/login"
               variant="outlined"
               sx={{
-                borderColor: "#dddddd",
                 color: "#555",
                 borderRadius: "20px",
                 textTransform: "none",
@@ -163,46 +154,45 @@ function SiteHeader({ search, onSearchChange }) {
                 backgroundColor: "transparent",
                 "&:hover": {
                   borderRadius: "20px",
-                  backgroundColor: "#f8f8f8",
                 },
               }}
             >
               Log in or sign up
             </Button>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={open ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                >
+                  <Avatar
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: deepOrange[500],
+                      cursor: "pointer",
+                    }}
+                  >
+                    {profileUser?.name?.slice(0, 1).toUpperCase()}
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+            </Box>
           )}
 
           {profileUser && (
             <React.Fragment>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                <Tooltip title="Account settings">
-                  <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                  >
-                    <Avatar
-                      sx={{
-                        width: 32,
-                        height: 32,
-                        bgcolor: deepOrange[500],
-                        cursor: "pointer",
-                      }}
-                    >
-                      {profileUser?.name?.slice(0, 1).toUpperCase()}
-                    </Avatar>
-                  </IconButton>
-                </Tooltip>
-              </Box>
-
               <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -257,10 +247,6 @@ function SiteHeader({ search, onSearchChange }) {
                     },
                   }}
                 >
-                  <ListItemIcon>
-                    <PersonIcon fontSize="small" />
-                  </ListItemIcon>
-
                   <ListItemText
                     primary="Full Name"
                     secondary={profileUser?.name}
@@ -275,10 +261,6 @@ function SiteHeader({ search, onSearchChange }) {
                     },
                   }}
                 >
-                  <ListItemIcon>
-                    <EmailIcon fontSize="small" />
-                  </ListItemIcon>
-
                   <ListItemText
                     primary="Email"
                     secondary={profileUser?.email}
@@ -293,10 +275,6 @@ function SiteHeader({ search, onSearchChange }) {
                     },
                   }}
                 >
-                  <ListItemIcon>
-                    <BadgeIcon fontSize="small" />
-                  </ListItemIcon>
-
                   <ListItemText primary="User ID" secondary={profileUser?.id} />
                 </MenuItem>
 

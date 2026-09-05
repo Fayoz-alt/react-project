@@ -130,6 +130,14 @@
 
 .listing-card {
   min-width: 0;
+  box-shadow: 2px 2px 20px rgb(145, 125, 125);
+  padding: 10px;
+  border-radius: 10px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .listing-image-wrap {
@@ -213,12 +221,17 @@
   padding: 4px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1265px) {
   .listing-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
+@media (max-width: 903px) {
+  .serach-input {
+    width: 400px;
+  }
+}
 @media (max-width: 680px) {
   .site-header {
     height: 68px;

@@ -103,14 +103,6 @@ function Bookings() {
             <Typography variant="h5" sx={{ mb: 2 }}>
               You don't have any bookings yet
             </Typography>
-
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => navigate("/")}
-            >
-              View Listings
-            </Button>
           </Box>
         )}
 

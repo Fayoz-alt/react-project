@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Details from "./components/Details";
 import Favorites from "./components/Favorites";
 import Bookings from "./components/Bookings";
+import Footer from "./components/Footer";
 
 function App() {
   const isRegisterOpen = true;
@@ -23,7 +24,9 @@ function App() {
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
-      <ToastContainer />
+
+      <Footer></Footer>
+     
     </ApolloProvider>
   );
 }

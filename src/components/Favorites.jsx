@@ -57,7 +57,7 @@ function Favorites() {
         <Box component={Link} to={"/"}>
           <Button
             variant="outlined"
-            sx={{ borderColor: `black`, color: `black`, marginBottom: 4 }}
+            sx={{ borderColor: "white", color: `black`, marginBottom: 4 }}
             startIcon={<ArrowBackIcon />}
           >
             Back
@@ -70,7 +70,7 @@ function Favorites() {
             mb: 4,
           }}
         >
-          My Favorites
+          Favorites:
         </Typography>
 
         {loading && <Typography>Loading...</Typography>}
@@ -78,16 +78,8 @@ function Favorites() {
         {!loading && favorites.length === 0 && (
           <Box sx={{ textAlign: "center", py: 8 }}>
             <Typography variant="h5" sx={{ mb: 2 }}>
-              No favorite listings yet
+              Empty
             </Typography>
-
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => navigate("/")}
-            >
-              View Listings
-            </Button>
           </Box>
         )}
 

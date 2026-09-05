@@ -7,10 +7,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   }
 
   return (
-    <Stack
-      direction="row"
-      sx={{ mt: 5, justifyContent: "center" }}
-    >
+    <Stack direction="row" sx={{ mt: 5, justifyContent: "center" }}>
       <PaginationMui
         count={totalPages}
         page={currentPage - 1}
