@@ -161,9 +161,7 @@ function Bookings() {
 
                     <Chip
                       label={booking.status}
-                      color={
-                        booking.status === "CONFIRMED" ? "success" : "default"
-                      }
+                      style={{ backgroundColor: "white" }}
                     />
                   </Stack>
 

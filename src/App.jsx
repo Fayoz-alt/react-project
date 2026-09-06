@@ -24,9 +24,6 @@ function App() {
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
-
-      <Footer></Footer>
-     
     </ApolloProvider>
   );
 }

@@ -143,21 +143,20 @@ function SiteHeader({ search, onSearchChange }) {
           {!accessToken ? (
             <Button
               component={Link}
+              color="success"
               to="/login"
-              variant="outlined"
+              variant="contained"
               sx={{
-                color: "#555",
+                color: "white",
                 borderRadius: "20px",
                 textTransform: "none",
                 fontWeight: 700,
-                border: "none",
-                backgroundColor: "transparent",
                 "&:hover": {
                   borderRadius: "20px",
                 },
               }}
             >
-              Log in or sign up
+              Log in
             </Button>
           ) : (
             <Box
@@ -248,34 +247,9 @@ function SiteHeader({ search, onSearchChange }) {
                   }}
                 >
                   <ListItemText
-                    primary="Full Name"
+                    primary="User name"
                     secondary={profileUser?.name}
                   />
-                </MenuItem>
-
-                <MenuItem
-                  sx={{
-                    cursor: "default",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary="Email"
-                    secondary={profileUser?.email}
-                  />
-                </MenuItem>
-
-                <MenuItem
-                  sx={{
-                    cursor: "default",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                >
-                  <ListItemText primary="User ID" secondary={profileUser?.id} />
                 </MenuItem>
 
                 <MenuItem onClick={handleLogOut}>

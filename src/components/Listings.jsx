@@ -63,61 +63,65 @@ function Listings({ search }) {
   const totalPages = data?.listings?.pagination?.totalPages;
 
   return (
-    <section className="listings-section">
-      <ListingsToolbar />
-      <div className="listing-grid">
-        {loading && (
-          <div className="listing-grid">
-            {new Array(8).fill(0).map((_, i) => (
-              <div className="card" key={i}>
-                <Skeleton
-                  variant="rectangular"
-                  height={180}
-                  style={{ width: "100%", borderRadius: `16px` }}
-                />
-                <Box sx={{ pt: 1.5, width: "100%" }}>
-                  <Skeleton variant="text" width="60%" height={24} />
-                  <Skeleton variant="text" width="40%" height={20} />
-                </Box>
-              </div>
-            ))}
-          </div>
-        )}
+    <>
+      {" "}
+      <section className="listings-section">
+        <ListingsToolbar />
+        <div className="listing-grid">
+          {loading && (
+            <div className="listing-grid">
+              {new Array(8).fill(0).map((_, i) => (
+                <div className="card" key={i}>
+                  <Skeleton
+                    variant="rectangular"
+                    height={180}
+                    style={{ width: "100%", borderRadius: `16px` }}
+                  />
+                  <Box sx={{ pt: 1.5, width: "100%" }}>
+                    <Skeleton variant="text" width="60%" height={24} />
+                    <Skeleton variant="text" width="40%" height={20} />
+                  </Box>
+                </div>
+              ))}
+            </div>
+          )}
 
-        {error && <p className="listing-message">{error.message}</p>}
+          {error && <p className="listing-message">{error.message}</p>}
 
-        {data?.listings?.pagination.total == 0 && (
-          <h2 className="listing-message">No Results</h2>
-        )}
-        {data?.listings?.items?.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            listing={listing}
-            onFavorite={(listingId) => {
-              if (!accessToken) {
-                navigate(`/login`);
-              } else {
-                if (listing?.isFavorite) {
-                  removeFavorite({ variables: { listingId } });
+          {data?.listings?.pagination.total == 0 && (
+            <h2 className="listing-message">No Results</h2>
+          )}
+          {data?.listings?.items?.map((listing) => (
+            <ListingCard
+              key={listing.id}
+              listing={listing}
+              onFavorite={(listingId) => {
+                if (!accessToken) {
+                  navigate(`/login`);
                 } else {
-                  addFavorite({ variables: { listingId } });
+                  if (listing?.isFavorite) {
+                    removeFavorite({ variables: { listingId } });
+                  } else {
+                    addFavorite({ variables: { listingId } });
+                  }
                 }
-              }
-            }}
+              }}
+            />
+          ))}
+        </div>
+        {!loading && (
+          <Pagination
+            page={page}
+            count={totalPages}
+            currentPage={page}
+            showFirstButton
+            totalPages={totalPages}
+            onPageChange={setPage}
           />
-        ))}
-      </div>
-      {!loading && (
-        <Pagination
-          page={page}
-          count={totalPages}
-          currentPage={page}
-          showFirstButton
-          totalPages={totalPages}
-          onPageChange={setPage}
-        />
-      )}
-    </section>
+        )}
+      </section>
+      <Footer></Footer>
+    </>
   );
 }
 export default Listings;

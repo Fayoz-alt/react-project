@@ -13,11 +13,7 @@ function ListingCard({ listing, onFavorite }) {
       onClick={() => navigate(`/listings/${listing.id}`)}
     >
       <div className="listing-image-wrap">
-        <img
-          src={listing.images}
-          alt={listing.title}
-          className="listing-image"
-        />
+        <img src={listing.images} className="listing-image" />
         <IconButton
           className="favorite-button"
           aria-label={`Save ${listing.title}`}
