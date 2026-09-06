@@ -50,7 +50,7 @@ function Listings({ search }) {
   const navigate = useNavigate();
 
   const { data, loading, error } = useQuery(listingsQuery, {
-    variables: { limit: 8, page: page - 1, search: search },
+    variables: { limit: 12, page: page - 1, search: search },
   });
 
   const [addFavorite, { error: addFavErr }] = useMutation(ADD_FAVORITE, {
@@ -70,7 +70,7 @@ function Listings({ search }) {
         <div className="listing-grid">
           {loading && (
             <div className="listing-grid">
-              {new Array(8).fill(0).map((_, i) => (
+              {new Array(12).fill(0).map((_, i) => (
                 <div className="card" key={i}>
                   <Skeleton
                     variant="rectangular"
