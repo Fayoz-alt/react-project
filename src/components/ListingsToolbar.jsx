@@ -19,38 +19,6 @@ function ListingsToolbar() {
     >
       <Box
         component={Link}
-        to={!accessToken ? "/login" : "/favorites"}
-        sx={{
-          width: {
-            xs: "100%",
-            sm: "200px",
-          },
-          height: "100px",
-          borderRadius: "20px",
-          border: "none",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 2,
-          textDecoration: "none",
-          color: "#222",
-          transition: "0.25s",
-        }}
-      >
-        <Stack>
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 800,
-            }}
-          >
-            🧡Favorites
-          </Typography>
-        </Stack>
-      </Box>
-
-      <Box
-        component={Link}
         to={!accessToken ? "/login" : "/bookings"}
         sx={{
           width: {
@@ -78,6 +46,37 @@ function ListingsToolbar() {
             }}
           >
             📚 Bookings
+          </Typography>
+        </Stack>
+      </Box>
+      <Box
+        component={Link}
+        to={!accessToken ? "/login" : "/favorites"}
+        sx={{
+          width: {
+            xs: "100%",
+            sm: "200px",
+          },
+          height: "100px",
+          borderRadius: "20px",
+          border: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          textDecoration: "none",
+          color: "#222",
+          transition: "0.25s",
+        }}
+      >
+        <Stack>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 800,
+            }}
+          >
+            🧡Favorites
           </Typography>
         </Stack>
       </Box>
