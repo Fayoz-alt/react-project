@@ -71,7 +71,7 @@ function Login({ open }) {
       }}
     >
       <Stack spacing={2} className="register-content" sx={{ padding: 3 }}>
-        <Stack direction={"row"} sx={{ justifyContent: `end` }}>
+        <Stack direction={"row"} sx={{ justifyContent: `start` }}>
           <Link to={`/`}>
             <button
               style={{
