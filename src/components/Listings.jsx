@@ -120,7 +120,7 @@ function Listings({ search }) {
           />
         )}
       </section>
-      <Footer></Footer>
+      {!error && <Footer></Footer>}
     </>
   );
 }

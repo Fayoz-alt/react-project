@@ -68,7 +68,7 @@ function Register({ open }) {
       maxWidth="xs"
       sx={{
         "& .MuiDialog-paper": {
-          borderRadius: "30px",
+          borderRadius: "10px",
         },
       }}
     >
@@ -91,12 +91,6 @@ function Register({ open }) {
             spacing={2}
             sx={{ justifyContent: `space-between`, alignItems: "center" }}
           >
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv_RJjot304oMZ8JkZIU4z5kdNV_glJ9HRfGpLabnaHA&s=10"
-              alt=""
-              width={`80px`}
-              height={`40px`}
-            />
             <Typography
               variant="h5"
               sx={{ fontWeight: `700`, fontFamily: `sans-serif` }}
@@ -214,7 +208,6 @@ function Register({ open }) {
             paddingBottom: `24px`,
           }}
         >
-          Did you have an account?
           <Link to={`/login`}>
             <button
               style={{
@@ -228,7 +221,7 @@ function Register({ open }) {
               Log In
             </button>
           </Link>
-          to your account.
+          to Continue.
         </p>
       </Stack>
     </Dialog>

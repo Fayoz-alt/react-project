@@ -66,7 +66,7 @@ function Login({ open }) {
       maxWidth="xs"
       sx={{
         "& .MuiDialog-paper": {
-          borderRadius: "30px",
+          borderRadius: "10px",
         },
       }}
     >
@@ -89,12 +89,6 @@ function Login({ open }) {
             spacing={2}
             sx={{ justifyContent: `space-between`, alignItems: "center" }}
           >
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv_RJjot304oMZ8JkZIU4z5kdNV_glJ9HRfGpLabnaHA&s=10"
-              alt=""
-              width={`80px`}
-              height={`40px`}
-            />
             <Typography
               variant="h5"
               sx={{ fontWeight: `700`, fontFamily: `sans-serif` }}
@@ -188,7 +182,7 @@ function Login({ open }) {
             paddingBottom: `24px`,
           }}
         >
-          Don't have account yet?
+          Wanna
           <Link to={`/register`}>
             <button
               style={{
@@ -199,10 +193,9 @@ function Login({ open }) {
                 fontWeight: `600`,
               }}
             >
-              Sign Up
+              Sign Up?
             </button>
           </Link>
-          right now!
         </p>
       </Stack>
     </Dialog>
